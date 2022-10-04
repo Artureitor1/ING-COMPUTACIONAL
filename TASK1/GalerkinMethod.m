@@ -1,4 +1,4 @@
-function [u]= GalerkinMethod(N,f,b,g,rho) ;
+function [u]= GalerkinMethod(N,f,b,g,rho) 
 syms x % 
 N_1 = subs(N,1) ;
 B = diff(N,x); 
