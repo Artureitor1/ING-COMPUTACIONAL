@@ -4,10 +4,13 @@ syms x %
 
 K = AssemblyK(coords, CN, rho );
 N_1 = subs(N,1) ;
-F= int(N.'*f,0,1) + N_1.'*b; 
+F= AssemblyF(coords, CN, f, N);
+ft = zeros(size(F));
+ft(end) = b;
+F = F + ft;
 r = 1; 
 l = 2:length(N); 
-dl = K(l,l)\(F(l)-K(l,r)*g); 
+dl = K(l,l) \ (F(l)-K(l,r)*g)
 d = [g;dl];
 u  = g + N(l)*dl; 
 end
