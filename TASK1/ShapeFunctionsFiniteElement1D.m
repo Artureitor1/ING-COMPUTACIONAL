@@ -12,9 +12,9 @@ xNODES = linspace(x0,xL,nnodes);
 
 N = sym(zeros(1,nnodes)) ;
 figure(30)
-hold on
-xlabel('x')
-ylabel('N(x)')
+% hold on
+% xlabel('x')
+% ylabel('N(x)')
 
 
 
@@ -29,8 +29,8 @@ for inode = 1:nnodes
         xi = xNODES(inode) ; xim1 = xNODES(inode-1) ;  xip1 =  xNODES(inode+1) ; 
         N(inode) = piecewise( xim1 <=x <=xi, (x-xim1)/(xi-xim1), xi <=x <=xip1, (xip1-x)/(xip1-xi)  , 0) ;
     end
-    fplot( N(inode),[x0,xL],'DisplayName',['N(',num2str(inode),')']) ;
-    text(xNODES(inode),0,['I=',num2str(inode)])
+%     fplot( N(inode),[x0,xL],'DisplayName',['N(',num2str(inode),')']) ;
+%     text(xNODES(inode),0,['I=',num2str(inode)])
 end
 %legend show
 

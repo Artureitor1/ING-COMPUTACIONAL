@@ -1,4 +1,4 @@
-function [coords,d]= F1D(nelms)
+function [coords,d, Fe]= F1D(nelms)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%% TASK 1 %%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -32,9 +32,6 @@ for e=1: nelms
     he = COOR_e(2)-COOR_e(1);
     Fe = Fe + (he /2 )* computeError (usol,[coords(e) coords(e+1)], [d(e) d(e+1)]);
 end
-Fe = Fe^0.5 /L
-
-
-
+Fe = sqrt(Fe) /L;
 
 end
