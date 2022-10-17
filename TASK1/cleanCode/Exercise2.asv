@@ -1,7 +1,4 @@
 %APARTADO 2
-clc
-clear all 
-clc
 syms theta u(x) 
 
 L = 1;
@@ -15,14 +12,17 @@ F_AE = g*pi^2/L;
 du = diff(u,x);
 ode = diff(u,x,2)+u*rho-s*x^2 == 0;
 usol(x) = dsolve(ode, u(0) == -g, du(L) == F_AE); 
-disp(simplify(usol));
+fplot(usol,[0 L]);
+
 %PLot
 figure
 hold on
 title('Graph of displacement along the bar by exact method', 'Interpreter','latex', 'FontSize',16)
-fplot(usol,[0 L],'Linewidth',2)
-xlabel('x', 'Interpreter','latex', 'FontSize',15)
-ylabel('displacement', 'Interpreter','latex', 'FontSize',15)
+fplot(sin(x+pi/5),[0 L],'Linewidth',2)
 grid on
 grid minor
+xlabel('$\alpha$', 'Interpreter','latex', 'FontSize',15)
+ylabel('$C_{m_{ac}}$', 'Interpreter','latex', 'FontSize',15)
+legend('$Re=600000$', '$Re=1000000$', 'location', 'northeast', 'Interpreter', 'latex', 'FontSize',12)
+ylim([-0.8 0.8])
 hold off
