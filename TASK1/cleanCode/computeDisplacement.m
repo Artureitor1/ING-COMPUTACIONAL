@@ -1,4 +1,4 @@
-function [d] = FEMmethod1D(nodes,restringedNodes,restringedForce,coords,conectivityMatrix,f,F_AE,rho); 
+function [d] = computeDisplacement(nodes,restringedNodes,restringedForce,coords,conectivityMatrix,f,F_AE,rho); 
 
 syms x 
 stiffnesMatrix = AssemblyK(coords, conectivityMatrix, rho);

@@ -20,10 +20,9 @@ elementsNumber = 3;
 nodes = 1:length (coords);
 restringedNodes = [1 -g];
 restringedForce= [nodes(end) F_AE];
-freeNodes = setdiff(nodes,restringedNodes(1,1));
 conectivityMatrix = computeConectivityMatrix1D(nodes);
 %Solver 
-nodeDisplacement = FEMmethod1D(nodes,restringedNodes,restringedForce,coords,conectivityMatrix,f,F_AE,rho); 
+nodeDisplacement = computeDisplacement(nodes,restringedNodes,restringedForce,coords,conectivityMatrix,f,F_AE,rho); 
 
 %Exact Solution:
 syms x
