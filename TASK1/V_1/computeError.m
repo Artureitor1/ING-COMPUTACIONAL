@@ -1,5 +1,4 @@
 function [outputArg1] = computeError(u, coords, d)
-
     eps = [-1/sqrt(3) 1/sqrt(3)];
     ws = [1 1];
     Fe = 0;
