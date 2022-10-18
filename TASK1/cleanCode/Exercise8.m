@@ -18,6 +18,7 @@ hold on
 title('Error of displacement and derivative', 'Interpreter','latex', 'FontSize',16)
 plot(log(1./elementsNumberArray),log(errorArray(:,1)),LineWidth=2)
 plot(log(1./elementsNumberArray),log(errorArray(:,2)),LineWidth=2)
+
 grid on
 grid minor
 xlabel('Number of Elements', 'Interpreter','latex', 'FontSize',15)
@@ -64,8 +65,8 @@ function error = computeError(nodeDisplacement,exactDisplacement,exactDerivative
                 errorPerElement(1,1) = errorPerElement(1,1) + ws(g) * (integratingErrorDisplacement);
                 errorPerElement(1,2) = errorPerElement(1,2) + ws(g) * (integratingErrorDerivative);
             end
-            errorPerElement = (elementLength/2 )*errorPerElement;
+            errorPerElement = (elementLength/2)*errorPerElement;
             error = error + errorPerElement;
     end
-
+    error = sqrt(error);
 end 
