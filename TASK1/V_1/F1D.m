@@ -30,7 +30,7 @@ for e=1: nelms
     NODOSe = CN(e,:);    % Global numbering of nodes of element "e"
     COOR_e = coords(NODOSe);
     he = COOR_e(2)-COOR_e(1);
-    Fe = Fe + (he /2 )* computeError (usol,[coords(e) coords(e+1)], [d(e) d(e+1)]);
+    Fe = Fe + (he /2 )* computeError (usol, COOR_e, [d(e);d(e+1)]);
 end
 Fe = sqrt(Fe) /L;
 
