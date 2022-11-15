@@ -15,7 +15,7 @@ f =  -s*x^2;
 F_AE = (g*pi^2)/L;
 
 %Numeric Data
-elementsNumber = 3;
+elementsNumber = 40;
 [nodes, coords] = ShapeFunctionsFiniteElement1D(elementsNumber, 0, L);
 nodes = 1:length (coords);
 restringedNodes = [1 -g];

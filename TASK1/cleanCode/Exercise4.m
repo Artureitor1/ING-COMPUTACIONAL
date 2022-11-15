@@ -33,7 +33,7 @@ uExact = (61740346358469708232516810123*cos((2778046668940015^(1/2)*x)/16777216)
 
 figure
 hold on
-title('Graph of displacement along the bar by exact method and polynomial aproximation', 'Interpreter','latex', 'FontSize',16)
+title(strcat('Graph of displacement along the bar by exact method and polynomial aproximation of   ',num2str(length(N)),' coeficients'), 'Interpreter','latex', 'FontSize',16)
 fplot(uExact,[0 L],'Linewidth',2)
 xPlot = (0:0.01:L);
 plot(xPlot,polyval(flipud(d),xPlot),'Linewidth',2);
