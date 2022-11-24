@@ -20,4 +20,5 @@ for element=1:numberElements  % Loop over number of elements
             stiffnesMatrix(A,B) = stiffnesMatrix(A,B) + Ke(a,b);
         end
     end
+    
 end

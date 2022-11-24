@@ -1,11 +1,8 @@
-function Ff = AssemblyF(coor,conectivityMatrix, f, nodes)
-
-numberElement = size(conectivityMatrix,1) ; % Number of rows and columns SIZE
+function [Residual,STRAIN,STRESS] = AssemblyFint(COOR,CN,d_k,stressFUN,AreaFUN)
+numberElement = size(CN,1) ; % Number of rows and columns SIZE
 numberNode = numberElement+1 ;
 nodesPerElement = size(conectivityMatrix,2) ;
-
-Ff = zeros ( numberNode , 1 );
-    for e=1:numberElement
+    for i = 1:numberElement
         elementNode = conectivityMatrix(e,:);    % Global numbering of nodes of element "e"
         elementCoor = coor(elementNode);
         he = elementCoor(2)-elementCoor(1);
@@ -14,10 +11,5 @@ Ff = zeros ( numberNode , 1 );
             A = conectivityMatrix(e ,a);
             Ff (A) = Ff (A) + Fe (a) ;
         end
-
-    end
-    
-
-
-    
-end
+    end 
+end 
