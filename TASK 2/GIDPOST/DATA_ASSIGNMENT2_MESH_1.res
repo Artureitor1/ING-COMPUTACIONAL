@@ -1,0 +1,45 @@
+GiD Post Results File 1.0 
+GaussPoints "GPset" Elemtype Quadrilateral
+Number of Gauss Points: 4
+Nodes not included
+Natural Coordinates: Internal
+End GaussPoints
+Result "Temperature"  "Load Analysis" 1 Scalar OnNodes  
+Values
+1 0.000000
+2 0.000000
+3 0.000000
+4 0.017414
+5 0.017861
+6 0.000000
+7 0.016408
+8 0.012989
+9 0.000000
+10 0.037831
+11 0.038027
+12 0.007617
+13 0.034107
+14 0.000000
+15 0.026187
+16 0.000000
+17 0.014369
+18 0.078395
+19 0.078337
+20 0.000000
+21 0.070354
+22 0.053833
+23 0.030431
+24 0.000000
+25 0.195720
+26 0.203689
+27 0.184235
+28 0.134054
+29 0.062859
+30 0.000000
+31 0.649325
+32 0.653193
+33 0.601826
+34 0.490284
+35 0.301761
+36 0.000000
+End Values

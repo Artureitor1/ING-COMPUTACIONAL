@@ -4,7 +4,7 @@
 % 1. NAME OF THE MESH AND DATA FILES. COORDINATES, CONNECTIVITIES,  LISTS
 % OF NODES FOR IMPOSING BOUNDARY CONDITIONS
 %--------------------------------------------------------------------------
-NameFileMeshDATA = 'GEOMETRIA2D' ;   % For reading data from GID.
+NameFileMeshDATA = 'MESH_1' ;   % For reading data from GID.
 % -----------------------------------------------------------
 % 2. Material data. 
 % --------------------------------------------------------------
