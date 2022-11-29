@@ -1,5 +1,6 @@
 function [weig,posgp,shapef,dershapef] = Quadrilateral4NInPoints()
-% This function returns, for each 2-node 1D linear element,
+% This function returns, for each 2-node 1D linear element, % Esta
+% definicion no esta bien 
 % and using a 1 points Gauss rule (ngaus=1): , if TypeIntegrand = K
 % and ngaus=2, if TypeIntegrand = RHS:
 %
@@ -13,7 +14,8 @@ weig  = [1 1 1 1] ;
 posgp = 1/sqrt(3)*[-1 -1; 1 -1; 1 1; -1 1] ;
 
 
-ndim = 2; nnodeE = 4 ;
+ndim = 2; 
+nnodeE = 4;
 ngaus = length(weig) ;
 shapef = zeros(ngaus,nnodeE) ;
 dershapef = zeros(ndim,nnodeE,ngaus) ;

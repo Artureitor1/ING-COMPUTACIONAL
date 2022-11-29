@@ -7,7 +7,9 @@ function Ke = ComputeKeMatrix(ConductM,weig,dershapef,Xe) ;
 % Xe: Global coordinates of the nodes of the element,  
 % this function returns the element conductance matrix Ke
 
-ndim = size(Xe,1) ; ngaus = length(weig) ; nnodeE = size(Xe,2)  ; 
+ndim = size(Xe,1) ; 
+ngaus = length(weig) ; 
+nnodeE = size(Xe,2)  ; 
 Ke = zeros(nnodeE,nnodeE) ; 
 
 for  g = 1:ngaus

@@ -12,9 +12,10 @@ if nargin == 0
     load('tmp3.mat')
 end
 
-ngaus = length(weig) ; nnodeEb = size(Xe,2)  ; 
-ndimB = size(dershapef,1) ; 
-FbndE = zeros(nnodeEb,1) ; 
+ngaus = length(weig); 
+nnodeEb = size(Xe,2); 
+ndimB = size(dershapef,1); 
+FbndE = zeros(nnodeEb,1); 
 
 for  g = 1:ngaus
     % Matrix of derivatives for Gauss point "g"

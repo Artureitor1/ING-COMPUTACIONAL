@@ -19,7 +19,9 @@ end
 
 
 % Dimensions of the problem 
-nnode = size(COOR,1);  nelemB = size(CNb,1); nnodeEb = size(CNb,2) ;     
+nnode = size(COOR,1);  
+nelemB = size(CNb,1);
+nnodeEb = size(CNb,2) ;     
 
 % Shape function routines (for calculating shape functions and derivatives)
 TypeIntegrand = 'RHS'; % Right-hand side vector
@@ -33,7 +35,7 @@ for e = 1:nelemB
     %dbstop('34')
     CNloc = CNb(e,:) ; 
     % Prescribed flux function evaluated at the nodes of element "e"
-    qFLUXe = qFLUXglo(e,:)' ;  qFLUXe = qFLUXe(:) ; 
+    qFLUXe = qFLUXglo(e,:)' ; 
     % Coordinates of the nodes of element "e"
     Xe = COOR(CNloc,:)' ;
     % Computation of elemental sourve flux vector   
