@@ -9,14 +9,18 @@ function [d qheatGLO posgp] = SolveHE(K,Fs,Fbnd,dR,rnod,COOR,CN,TypeElement,Cond
 % rnod = Set of nodes at which temperature is prescribed 
 % dR = Vector of prescribed displacements 
 % ----------------------
-nnode = size(COOR,1); ndim = size(COOR,2); nelem = size(CN,1); nnodeE = size(CN,2) ;     posgp=[] ;
+nnode = size(COOR,1); 
+ndim = size(COOR,2); 
+nelem = size(CN,1); 
+nnodeE = size(CN,2);     
+posgp=[];
 % Solution of the system of FE equation
 % Right-hand side 
 F = Fs + Fbnd ; 
 % Set of nodes at which temperature is unknown 
-lnod = 1:nnode ; 
+lnod = 1:nnode; 
 lnod(rnod) = [] ;
-dL =  inv(K(lnod,lnod))*(F(lnod) -K(lnod,rnod)*dR);
+dL =  (K(lnod,lnod))\(F(lnod) -K(lnod,rnod)*dR); %Mas eficiente usando "\"
 if ~any(K)
     warning('You must code the equation dL =  Kll^{-1}*(Fl -Klr*dR) ')
     dL = zeros(size(lnod));   
@@ -28,8 +32,7 @@ d(lnod)= dL ;
 d(rnod) = dR ;
 
 %%%% COmputation of heat flux vector at each gauss point 
-disp('Computation of heat flux vector at each gauss point and elements')
-ngaus = size(posgp,2) ; ; qheatGLO = zeros(ngaus*ndim,nelem); 
-% Computing this array is not mandatory.... 
-%[qheatGLO posgp]= HeatFlux(COOR,CN,TypeElement,ConductMglo,d) ; 
+% disp('Computation of heat flux vector at each gauss point and elements')
+
+[qheatGLO posgp]= ComputeHeatFlux(COOR,CN,TypeElement,ConductMglo,d) ; 
 
