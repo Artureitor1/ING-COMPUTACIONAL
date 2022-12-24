@@ -51,5 +51,5 @@ Fbnd = ComputeFbnd(COOR,CNb,TypeElementB, qFLUXglo) ;
 
 % D) Solving for the vector of unknown temperatures 
 disp('Solving...')
-[d qheatGLO posgp] = SolveHE(K,Fs,Fbnd,dR,rnod,COOR,CN,TypeElement,ConductMglo) ; 
+[d,qheatGLO,posgp] = SolveHE(K,Fs,Fbnd,dR,rnod,COOR,CN,TypeElement,ConductMglo) ; 
 
