@@ -21,10 +21,6 @@ F = Fs + Fbnd ;
 lnod = 1:nnode; 
 lnod(rnod) = [] ;
 dL =  (K(lnod,lnod))\(F(lnod) -K(lnod,rnod)*dR); %Mas eficiente usando "\"
-if ~any(K)
-    warning('You must code the equation dL =  Kll^{-1}*(Fl -Klr*dR) ')
-    dL = zeros(size(lnod));   
-end
  
 % Vector of   temperatures 
 d = zeros(nnode,1) ; 

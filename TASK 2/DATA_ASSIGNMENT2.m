@@ -15,7 +15,7 @@ PROPMAT(imat).kappa =  10  ; %  Conductivity  of material "imat" (ISOTROPIC)
 % 3. Dirichlet boundary conditions (prescribed temperature)
 % -----------------------------------------------------------
 icond = 1; % Number of condition 
-DIRICHLET(icond).NUMBER_LINE = 1 ;   % Number of line on which temperature  is prescribed
+DIRICHLET(icond).NUMBER_LINE = 3 ;   % Number of line on which temperature  is prescribed
 DIRICHLET(icond).PRESCRIBED_TEMPER = 0 ;  % (constant along the line)
 icond = 2; % Number of condition 
 DIRICHLET(icond).NUMBER_LINE = 2;   % Number of line on which temperature  is prescribed
@@ -24,8 +24,11 @@ DIRICHLET(icond).PRESCRIBED_TEMPER = 0 ;  % Prescribed temperature (constant alo
 % 4. Neumann Boundary conditions (prescribed flux)
 % ------------------------------------------------
 icond= 1 ;
-NEUMANN(icond).NUMBER_LINE = 4 ;  % Line 
+NEUMANN(icond).NUMBER_LINE = 1 ;  % Line 
 NEUMANN(icond).PRESCRIBED_qBAR= -20 ;  % CONSTANT Prescribed heat flux vector x   normal unit vector to the line  
+icond= 2 ;
+NEUMANN(icond).NUMBER_LINE = 4 ;  % Line 
+NEUMANN(icond).PRESCRIBED_qBAR= 0 ;  % CONSTANT Prescribed heat flux vector x   normal unit vector to the line  
 % -------------------------------------------
 % 4. Heat source (constant all over the body)
 % --------------------------------------------
