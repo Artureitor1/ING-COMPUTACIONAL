@@ -23,8 +23,7 @@ switch TypeElement
         end
     case 'Quadrilateral'
         if nnodeE ==4
-           error('Implement function Quadrilateral4NInPoints  (you can use the one developed for heat conduction problems)')
-           %     [weig,posgp,shapef,dershapef] = Quadrilateral4NInPoints ;
+           [weig,posgp,shapef,dershapef] = Quadrilateral4NInPoints ;
         else
             warning('Option not implemented')
         end
