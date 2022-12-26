@@ -14,9 +14,13 @@ end
 % Input data file %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 NAME_INPUT_DATA = 'BEAM3D' ;  % Name of the mesh file 
+%NAME_INPUT_DATA_Termal = 'Thermal3D' ;  % Name of the mesh file 
+
 %------------------------------------------------------
 
-% PREPROCESS  
+% PREPROCESS
+%[COOR,CN,TypeElement,TypeElementB, celasglo,  DOFr,dR, Tnod,CNb,fNOD,Fpnt,NameFileMesh,typePROBLEM,celasgloINV,DATA] = ReadInputDataFile(NAME_INPUT_DATA)  ; 
+
 [COOR,CN,TypeElement,TypeElementB, celasglo,  DOFr,dR,...  
     Tnod,CNb,fNOD,Fpnt,NameFileMesh,typePROBLEM,celasgloINV,DATA] = ReadInputDataFile(NAME_INPUT_DATA)  ; 
 

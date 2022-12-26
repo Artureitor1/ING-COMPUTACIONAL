@@ -20,7 +20,8 @@ for e = 1:nelem
     Fbe = ComputeFbeVector(fe,weig,shapef,dershapef,Xe) ; 
     for anod=1:nnodeE 
             a = Nod2DOF(anod,ndim) ; 
-            Anod = CN(e,anod) ; A = Nod2DOF(Anod,ndim) ;    
+            Anod = CN(e,anod) ; 
+            A = Nod2DOF(Anod,ndim) ;    
             Fb(A) = Fb(A) + Fbe(a) ; 
     end
 end   

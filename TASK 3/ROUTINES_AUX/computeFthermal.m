@@ -1,4 +1,4 @@
-function K = ComputeK(COOR,CN,TypeElement, celasglo) ;
+function Fthermal = computeFthermal(COOR,CN,TypeElement, celasglo);
 %%%%
 % This subroutine   returns the global stiffness matrix K (ndim*nnode x ndim*nnode)
 % Inputs:   COOR: Coordinate matrix (nnode x ndim), % CN: Connectivity matrix (nelem x nnodeE), % TypeElement: Type of finite element (quadrilateral,...),  celasglo (nstrain x nstrain x nelem)  % Array of elasticity matrices
@@ -12,7 +12,7 @@ nelem = size(CN,1);
 nnodeE = size(CN,2) ;  
 % nstrain = size(celasglo,1) ;
 % Shape function routines (for calculating shape functions and derivatives)
-TypeIntegrand = 'K';
+TypeIntegrand = 'K'; %Para octaedros esto no hace falta
 [weig,posgp,shapef,dershapef] = ComputeElementShapeFun(TypeElement,nnodeE,TypeIntegrand) ;
 % Assembly of matrix K
 % ----------------
@@ -22,7 +22,7 @@ for e = 1:nelem
     celas = celasglo(:,:,e) ;  % Stiffness matrix of element "e"
     CNloc = CN(e,:) ;   % Coordinates of the nodes of element "e"
     Xe = COOR(CNloc,:)' ;     % Computation of elemental stiffness matrix
-    Ke = ComputeKeMatrix(celas,weig,dershapef,Xe) ;
+    Ke = ComputeFeThermalMatrix(celas,weig,dershapef,Xe) ;
    	degress = Nod2DOF(CNloc,ndim);
     K(degress, degress) =  K(degress, degress) + Ke;
   
@@ -31,5 +31,3 @@ for e = 1:nelem
         disp(['e=',num2str(e)])
     end
 end
-
-

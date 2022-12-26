@@ -56,6 +56,10 @@ Fb = ComputeFb(COOR,CN,TypeElement, fNOD);
 disp('Computing  external force vector due to   boundary tractions ..')
 Ftrac = FtracCOMP(COOR,CNb,TypeElementB,Fpnt,Tnod);
 
+disp('Computing  thermal stress ..')
+%Fthermal = computeFthermal(COOR,CNb,TypeElementB,Fpnt,Tnod);
+
+
 % D) Solving for the vector of unknown displacements 
 disp('Solving...')
 [d strainGLO stressGLO  React posgp] = SolveELAS(K,Fb,Ftrac,dR,DOFr,COOR,CN,TypeElement,celasglo,typePROBLEM,celasgloINV,DATA) ; 
