@@ -28,10 +28,11 @@ switch TypeElement
             warning('Option not implemented')
         end
     case 'Hexahedra'
-        
-        error('Implement function Hexahedra8NInPoints')
-        %    [weig,posgp,shapef,dershapef] = Hexahedra8NInPoints ;
-        [weig,posgp,shapef,dershapef] = Hexahedra8NInPoints ;
+        if nnodeE ==8
+            [weig,posgp,shapef,dershapef] = Hexahedra8NInPoints ;
+        else
+            warning('Option not implemented')
+        end
     otherwise
         error('Option not implemented')
 end
