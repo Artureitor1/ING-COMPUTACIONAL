@@ -25,7 +25,7 @@ end
 stressGLO = zeros(ngaus*nstrain,nelem);
 strainGLO = zeros(ngaus*nstrain,nelem);
 stressGLO_elem = zeros(nstrain,nelem);
-strainGLO_eleme = zeros(nstrain,nelem);
+
 for e = 1:nelem
     % Elasticity matrix of element "e"
     celas = celasglo(:,:,e) ;
