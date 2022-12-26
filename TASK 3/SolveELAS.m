@@ -17,16 +17,15 @@ nnode = size(COOR,1); ndim = size(COOR,2); nelem = size(CN,1); nnodeE = size(CN,
 % Solution of the system of FE equation
 % Right-hand side
 F = Fb + Ftrac ;
-% Set of nodes at which temperature is unknown
+% Set of nodes at which position is unknown
 DOFl = 1:nnode*ndim ;
 DOFl(DOFr) = [] ;
 
+dL =  (K(DOFl,DOFl))\(F(DOFl) -K(DOFl,DOFr)*dR);
 
-error('You should implement the solution of the system of equations, as well as the computation of nodal reaction forces')
-% To be completed .... 
-% dL =  K^{-1}*(Fl .Klr*dR)    
-% *** 
 d = zeros(nnode*ndim,1) ; % Nodal displacements (initialization)
+d(DOFl)= dL ; 
+d(DOFr) = dR ;
 React = zeros(size(d)) ;  %  REaction forces  (initialization)
   
 
