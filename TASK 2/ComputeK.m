@@ -41,5 +41,6 @@ for e = 1:nelem
     elementNodes = CN(e,:);
     elementCoord = COOR(elementNodes,:)';
     Ke = ComputeKeMatrix(ConductMglo(:,:,e), weig, dershapef, elementCoord);
-    K(elementNodes, elementNodes) =  K(elementNodes, elementNodes) + Ke; 
+    degress = Nod2DOF(elementNodes,ndim);
+    K(degress, degress) =  K(degress, degress) + Ke; 
 end

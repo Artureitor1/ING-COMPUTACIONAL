@@ -20,8 +20,14 @@ for e = 1:nelem
     Xe = COOR(CNloc,:)' ;     % Computation of elemental stiffness matrix
     Ke = ComputeKeMatrix(celas,weig,dershapef,Xe) ;
     for anod=1:nnodeE
-       error('You should program the assembly of the stiffness matrix !!!! ')
+       %error('You should program the assembly of the stiffness matrix !!!! ')
        % ------------------------------------------------------------------------
+        elementNodes = CN(e,:);
+        elementCoord = COOR(elementNodes,:)';
+        Ke = ComputeKeMatrix(ConductMglo(:,:,e), weig, dershapef, elementCoord);
+        
+        K(elementNodes, elementNodes) =  K(elementNodes, elementNodes) + Ke; 
+    
     end
     
     if mod(e,10)==0
