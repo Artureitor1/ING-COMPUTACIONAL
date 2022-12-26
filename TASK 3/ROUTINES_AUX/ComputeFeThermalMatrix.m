@@ -1,4 +1,4 @@
-function FeThermal = ComputeFeThermalMatrix(fe,weig,shapef,dershapef,Xe) ;
+function FeThermal = ComputeFeThermalMatrix(tempNode,weig,shapef,dershapef,Xe,beta) ;
 % Given 
 % fe: Nodal values of the body force    (nnodeE*ndim x1)
 % weig :   Vector of Gauss weights (1xngaus)
@@ -8,18 +8,21 @@ function FeThermal = ComputeFeThermalMatrix(fe,weig,shapef,dershapef,Xe) ;
 % Xe: Global coordinates of the nodes of the element,  
 % % this function returns the element body force vector  Fbe
 ndim = size(Xe,1) ; ngaus = length(weig) ; nnodeE = size(Xe,2)  ; 
-Fbe = zeros(ndim*nnodeE,1) ; 
+FeThermal = zeros(ndim*nnodeE,1) ; 
 for  g = 1:ngaus
     % Matrix of derivatives for Gauss point "g"
     BeXi = dershapef(:,:,g) ; 
     % Matrix of shape functions at point "g"
     NeSCL = shapef(g,:) ; 
-    % Matrix of shape functions at point "g" (for vector-valued fields)
-    Ne = StransfN(NeSCL,ndim) ; 
     % Jacobian Matrix 
     Je = Xe*BeXi' ; 
     % JAcobian 
     detJe = det(Je) ;    
     %
-    Fbe = Fbe + weig(g)*detJe*Ne'*(Ne*fe) ; 
+    % Matrix of derivatives with respect to physical coordinates 
+    BeTILDE = inv(Je)'*BeXi ; 
+    % Matrix of derivatives with respect to physical coordinates 
+    Be = QtransfB(BeTILDE,ndim) ;
+    %
+    FeThermal = FeThermal + weig(g)*detJe*Be'*(beta*(NeSCL*tempNode)); 
 end
