@@ -10,9 +10,9 @@ function [weig,posgp,shapef,dershapef] = Hexahedra8NInPoints()
 % dershape: Array with the derivatives of shape functions, with respect to
 % element coordinates (ndim x nnodeE x ngaus)
 
-weig  = [1, 1, 1, 1, 1, 1, 1, 1] ;
-posgp = 1/sqrt(3)*[-1 -1 -1; 1 -1 -1; 1 1 -1; -1 1 -1; ...
-                   -1 -1  1; 1 -1  1; 1 1  1; -1 1  1] ;
+weig  = [1; 1; 1; 1; 1; 1; 1; 1] ;
+posgp = [-1 -1 -1; 1 -1 -1; 1 1 -1; -1 1 -1; ...
+         -1 -1  1; 1 -1  1; 1 1  1; -1 1  1] * 1/sqrt(3) ;
 
 
 ndim = 3; 
