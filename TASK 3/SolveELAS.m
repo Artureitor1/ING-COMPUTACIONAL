@@ -13,7 +13,10 @@ function [d strainGLO stressGLO  React posgp] = SolveELAS(K,Fb,Ftrac,dR,DOFr,COO
 if nargin == 0
     load('tmp.mat')
 end
-nnode = size(COOR,1); ndim = size(COOR,2); nelem = size(CN,1); nnodeE = size(CN,2) ;     %
+nnode = size(COOR,1); 
+ndim = size(COOR,2); 
+nelem = size(CN,1); 
+nnodeE = size(CN,2) ;     %
 % Solution of the system of FE equation
 % Right-hand side
 F = Fb + Ftrac+Fthermal ;
@@ -21,12 +24,11 @@ F = Fb + Ftrac+Fthermal ;
 DOFl = 1:nnode*ndim ;
 DOFl(DOFr) = [] ;
 
-dL =  (K(DOFl,DOFl))\(F(DOFl) -K(DOFl,DOFr)*dR);
-
 d = zeros(nnode*ndim,1) ; % Nodal displacements (initialization)
-d(DOFl)= dL ; 
-d(DOFr) = dR ;
 React = zeros(size(d)) ;  %  REaction forces  (initialization)
+
+d(DOFl,1) = K(DOFl,DOFl)\(F(DOFl,1) - K(DOFl, DOFr)*dR);
+React(DOFr,1) = K(DOFr,DOFr)*d(DOFr,1) + K(DOFr,DOFl)*d(DOFl,1) - F(DOFr,1);
   
 
 %%%% COmputation of strain and stress vector at each gauss point

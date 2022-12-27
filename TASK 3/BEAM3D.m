@@ -4,7 +4,7 @@
 % % 1. NAME OF THE MESH AND DATA FILES. COORDINATES, CONNECTIVITIES,  LISTS
 % % OF NODES FOR IMPOSING BOUNDARY CONDITIONS
 % %--------------------------------------------------------------------------
-NameFileMeshDATA = 'Beam_1' ;   %  This is the name of GIDs project
+NameFileMeshDATA = 'MyFirstMesh3D' ;   %  This is the name of GIDs project
 % wherein the mesh has been constructed. To generate the files needed by matlab,
 % remember to export both the mesh and the conditions data. (Files >
 % Export > Gid Mesh) and (Files > Export > Calculation File)

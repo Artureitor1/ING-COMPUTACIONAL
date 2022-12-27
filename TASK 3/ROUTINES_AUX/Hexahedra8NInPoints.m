@@ -10,19 +10,63 @@ function [weig,posgp,shapef,dershapef] = Hexahedra8NInPoints()
 % dershape: Array with the derivatives of shape functions, with respect to
 % element coordinates (ndim x nnodeE x ngaus)
 
-weig  = [1, 1, 1, 1, 1, 1, 1, 1] ;
-posgp = 1/sqrt(3)*[-1 -1 -1; 1 -1 -1; 1 1 -1; -1 1 -1; ...
-                   -1 -1  1; 1 -1  1; 1 1  1; -1 1  1] ;
+% weig  = [1, 1, 1, 1, 1, 1, 1, 1] ;
+% posgp = 1/sqrt(3)*[-1 -1 -1; 1 -1 -1; 1 1 -1; -1 1 -1; ...
+%                    -1 -1  1; 1 -1  1; 1 1  1; -1 1  1] ;
+% 
+% 
+% ndim = 3; 
+% nnodeE = 8;
+% ngaus = length(weig) ;
+% shapef = zeros(ngaus,nnodeE) ;
+% dershapef = zeros(ndim,nnodeE,ngaus) ;
+% for g=1:length(weig)
+%     xi = posgp(g,:) ;
+%     [Ne, BeXi] = Hexahedra8N(xi) ;
+%     shapef(g,:) = Ne ;
+%     dershapef(:,:,g) = BeXi ;
+% end
 
 
-ndim = 3; 
+ngaus = 8;
+ndim = 3;
 nnodeE = 8;
-ngaus = length(weig) ;
-shapef = zeros(ngaus,nnodeE) ;
-dershapef = zeros(ndim,nnodeE,ngaus) ;
-for g=1:length(weig)
-    xi = posgp(g,:) ;
-    [Ne, BeXi] = Hexahedra8N(xi) ;
-    shapef(g,:) = Ne ;
-    dershapef(:,:,g) = BeXi ;
+
+signs = [-1 -1 -1;
+          1 -1 -1;
+          1  1 -1;
+         -1  1 -1;
+         -1 -1  1;
+          1 -1  1;
+          1  1  1;
+         -1  1  1].';
+     
+posgp = 1/sqrt(3)*signs;
+weig = ones(1,8);
+
+shapef = 1/(2^ndim)*ones(ngaus,nnodeE);
+        
+for i = 1:ngaus
+    for j = 1:nnodeE
+        for k = 1:ndim
+            shapef(i,j) = shapef(i,j)*(1+signs(k,j)*posgp(k,i));
+        end
+    end
+end
+
+dershapef = zeros(ndim,nnodeE,ngaus);
+
+for i = 1:nnodeE
+   dershapef(:,:,i) = 1/(2^ndim)*signs;
+   
+   for row = 1:ndim
+       for col = 1:nnodeE
+           range = 1:ndim;
+           for j = range(range ~= row)
+               dershapef(row, col,i) = dershapef(row, col,i)*(1+signs(j,col)*posgp(j,i));
+           end
+       end
+   end
+end
+                               
 end

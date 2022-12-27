@@ -22,14 +22,14 @@ NAME_INPUT_DATA = 'BEAM3D' ;  % Name of the mesh file
 [COOR,CN,TypeElement,TypeElementB, celasglo,  DOFr,dR,...  
     Tnod,CNb,fNOD,Fpnt,NameFileMesh,typePROBLEM,celasgloINV,DATA] = ReadInputDataFile(NAME_INPUT_DATA)  ; 
 % TEMPERATURE
-tempNode = ones(length(COOR),1)*500;
+tempNode = ones(length(COOR),1)*0;
 alfa = [21;21;21;0;0;0]*10^(-6);
 % SOLVER 
 % --------------------------------------------
 [d strainGLO stressGLO  React posgp]= SolveElastFE(COOR,CN,TypeElement,TypeElementB, celasglo,  DOFr,dR,...  
     Tnod,CNb,fNOD,Fpnt,typePROBLEM,celasgloINV,DATA,tempNode,alfa)  ; 
 
-posgp = posgp';
+%posgp = posgp';
 % POSTPROCESS
 % --------------------------------------------
 GidPostProcess(COOR,CN,TypeElement,d,strainGLO, stressGLO,  React,NAME_INPUT_DATA,posgp,NameFileMesh,DATA);
