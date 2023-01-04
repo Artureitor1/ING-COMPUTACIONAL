@@ -29,6 +29,7 @@ alfa = [21;21;21;0;0;0]*10^(-6);
 [d strainGLO stressGLO  React posgp]= SolveElastFE(COOR,CN,TypeElement,TypeElementB, celasglo,  DOFr,dR,...  
     Tnod,CNb,fNOD,Fpnt,typePROBLEM,celasgloINV,DATA,tempNode,alfa)  ; 
 
+reactionAdder(React,COOR);
 %posgp = posgp';
 % POSTPROCESS
 % --------------------------------------------

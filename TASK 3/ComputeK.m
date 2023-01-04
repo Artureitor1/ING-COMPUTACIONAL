@@ -10,7 +10,7 @@ nnode = size(COOR,1);
 ndim = size(COOR,2); 
 nelem = size(CN,1);
 nnodeE = size(CN,2) ;  
-vecDeg = (1:1:nnode*ndim);
+vecDeg = (1:1:nnode*ndim); %vecDeg and matDeg are used to relate local to global DEG
 matDeg = reshape(vecDeg,ndim,nnode);
 % nstrain = size(celasglo,1) ;
 % Shape function routines (for calculating shape functions and derivatives)
@@ -27,10 +27,9 @@ for e = 1:nelem
     Ke = ComputeKeMatrix(celas,weig,dershapef,Xe) ;
     
    	%degress = Nod2DOF(CNloc,ndim);
-    degress = reshape(matDeg(:,CNloc),nnodeE*ndim,1); %Con fines didacticos se ha decido utilizar un conversor de grados locales a globales propio (sin utilizar el Nod2DOF)
+    degress = reshape(matDeg(:,CNloc),nnodeE*ndim,1); %For didactical purposes it has been decided to use a local to global degree converter of our own (without using Nod2DOF).
     K(degress, degress) =  K(degress, degress) + Ke;
 
-    
     if mod(e,10)==0  % To display on the screen the number of element being assembled
         disp(['e=',num2str(e)])
     end
