@@ -1,5 +1,5 @@
 BeginZE
-   x -0.876235127449035645 2.95031523704528809
+   x -0.914553284645080566 2.98863339424133301
    y 1.35681581497192383 -0.384687453508377075
    z -3.875 3.875
    e 1.16666662693023682
@@ -12,8 +12,8 @@ BeginZE
    pfo 0
    pf 4
    pv 0
-   NowUse 2
-   DrawingType 3
+   NowUse 0
+   DrawingType 0
    LightVector 90 90 150 0
    OGLShadow(UseShadows) 0
    OGLShadow(RenderMode) RenderNice
