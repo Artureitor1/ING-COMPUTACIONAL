@@ -1,4 +1,4 @@
-clc
+clci
 clear all
 % "Template" Finite Element Program for Heat Conduction Problems
 % ECA.
