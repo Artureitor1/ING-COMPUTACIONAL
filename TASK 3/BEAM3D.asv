@@ -93,20 +93,20 @@ NEUMANN(icond).FORCE_PER_UNIT_SURFACE= [0,0.0,0] ; % Force per unit surface (uni
 % % 5.2) POINT FORCES (FORCES APPLIED ON NODES)
 % % --------------------------------------------
 iforce  = 1; % Number of force
-POINT_FORCE(iforce).NODE = 38;
-POINT_FORCE(iforce).VALUE = [0,0,0.25];    % Young's Modulus Units*(Length units)^2. In this case, MN
+POINT_FORCE(iforce).NODE = 41;
+POINT_FORCE(iforce).VALUE = [0,0,2.5];    % Young's Modulus Units*(Length units)^2. In this case, MN
 
 iforce  = 2; % Number of force
-POINT_FORCE(iforce).NODE = 35;
-POINT_FORCE(iforce).VALUE = [0,-0.25,0];    % Young's Modulus Units*(Length units)^2. In this case, MN
+POINT_FORCE(iforce).NODE = 39;
+POINT_FORCE(iforce).VALUE = [0,-2.5,0];    % Young's Modulus Units*(Length units)^2. In this case, MN
 
 iforce  = 3; % Number of force
-POINT_FORCE(iforce).NODE = 163;
-POINT_FORCE(iforce).VALUE = [0.0,0,-0.25];    % Young's Modulus Units*(Length units)^2. In this case, MN
+POINT_FORCE(iforce).NODE = 191;
+POINT_FORCE(iforce).VALUE = [0.0,0,-2.5];    % Young's Modulus Units*(Length units)^2. In this case, MN
 
 iforce  = 4; % Number of force
-POINT_FORCE(iforce).NODE = 160;
-POINT_FORCE(iforce).VALUE = [0,0.25,0];    % Young's Modulus Units*(Length units)^2. In this case, MN
+POINT_FORCE(iforce).NODE = 190;
+POINT_FORCE(iforce).VALUE = [0,2.5,0];    % Young's Modulus Units*(Length units)^2. In this case, MN
 
 
 % iforce  = 2; % Number of force

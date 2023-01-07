@@ -1,6 +1,5 @@
 function [d] = computeDisplacement(nodes,restringedNodes,restringedForce,coords,conectivityMatrix,f,F_AE,rho); 
 
-syms x 
 stiffnesMatrix = AssemblyK(coords, conectivityMatrix, rho);
 
 Force = AssemblyF(coords, conectivityMatrix, f, nodes);
