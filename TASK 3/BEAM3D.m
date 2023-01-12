@@ -39,21 +39,21 @@ PROPMAT(imat).ElasticityMatrix =  ElasticityMatrix  ; %
 % imat = 2 .... Repeat the above sequence of operations for defining
 % another material
 
-% %% Conditions for uniform force
-% % % -----------------------------------------------------------
-% % % 4. Dirichlet boundary conditions (prescribed displacements)
-% % % -----------------------------------------------------------
+%% Conditions for uniform force
+% % -----------------------------------------------------------
+% % 4. Dirichlet boundary conditions (prescribed displacements)
+% % -----------------------------------------------------------
 % icond = 1; % Number of condition
 % DIRICHLET(icond).NUMBER_SURFACE = 1 ;   % Number of SURFACE on which DISPLACEMENT  is prescribed
 % DIRICHLET(icond).PRESCRIBED_DISP = {[0],[0],[0]} ;  % Constraints x,y and z directions. If empty, no constraints
 %  
-% 
-% 
-% % % -------------------------------------------------
-% % % 5. External forces  (NEUMANN CONDITIONS, POINT FORCES AND BODY FORCES)
-% % --------------------------------------------------------------------
-% %  5.1) NEUMANN COND. Loads per unit surface
-% % ------------------------------------------------------------------
+
+
+% % -------------------------------------------------
+% % 5. External forces  (NEUMANN CONDITIONS, POINT FORCES AND BODY FORCES)
+% --------------------------------------------------------------------
+%  5.1) NEUMANN COND. Loads per unit surface
+% ------------------------------------------------------------------
 % icond= 1 ;
 % NEUMANN(icond).NUMBER_SURFACE = 2 ;  % Surface on which the load is applied
 % NEUMANN(icond).FORCE_PER_UNIT_SURFACE= [0,-0.5,0] ; % Force per unit surface (units determined by
@@ -69,20 +69,20 @@ PROPMAT(imat).ElasticityMatrix =  ElasticityMatrix  ; %
 
 
 %% Conditions for torque
-% % -----------------------------------------------------------
-% % 4. Dirichlet boundary conditions (prescribed displacements)
-% % -----------------------------------------------------------
+% % % -----------------------------------------------------------
+% % % 4. Dirichlet boundary conditions (prescribed displacements)
+% % % -----------------------------------------------------------
 icond = 1; % Number of condition
 DIRICHLET(icond).NUMBER_SURFACE = 1 ;   % Number of SURFACE on which DISPLACEMENT  is prescribed
 DIRICHLET(icond).PRESCRIBED_DISP = {[0],[0],[0]} ;  % Constraints x,y and z directions. If empty, no constraints
- 
-
-
-% % -------------------------------------------------
-% % 5. External forces  (NEUMANN CONDITIONS, POINT FORCES AND BODY FORCES)
-% --------------------------------------------------------------------
-%  5.1) NEUMANN COND. Loads per unit surface
-% ------------------------------------------------------------------
+%  
+% 
+% 
+% % % -------------------------------------------------
+% % % 5. External forces  (NEUMANN CONDITIONS, POINT FORCES AND BODY FORCES)
+% % --------------------------------------------------------------------
+% %  5.1) NEUMANN COND. Loads per unit surface
+% % ------------------------------------------------------------------
 icond= 1 ;
 NEUMANN(icond).NUMBER_SURFACE = 2 ;  % Surface on which the load is applied
 NEUMANN(icond).FORCE_PER_UNIT_SURFACE= [0,0.0,0] ; % Force per unit surface (units determined by
@@ -108,12 +108,12 @@ iforce  = 4; % Number of force
 POINT_FORCE(iforce).NODE = 160;
 POINT_FORCE(iforce).VALUE = [0,0.25,0];    % Young's Modulus Units*(Length units)^2. In this case, MN
 
-
-% iforce  = 2; % Number of force
-% POINT_FORCE(iforce).NODE = 1;
-% POINT_FORCE(iforce).VALUE = [0,0,0];    % Young's Modulus Units*(Length units)^2. In this case, MN
-
-
+% 
+% % iforce  = 2; % Number of force
+% % POINT_FORCE(iforce).NODE = 1;
+% % POINT_FORCE(iforce).VALUE = [0,0,0];    % Young's Modulus Units*(Length units)^2. In this case, MN
+% 
+% 
 
 % -------------------------
 %---5.3)  Body forces

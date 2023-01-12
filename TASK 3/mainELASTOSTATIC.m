@@ -1,5 +1,6 @@
 clc
 clear all
+tic;
 % Finite Element Program for Elastostatic problems  
 % ECA.
 % Technical University of Catalonia
@@ -34,3 +35,4 @@ reactionAdder(React,COOR);
 % POSTPROCESS
 % --------------------------------------------
 GidPostProcess(COOR,CN,TypeElement,d,strainGLO, stressGLO,  React,NAME_INPUT_DATA,posgp,NameFileMesh,DATA);
+toc;
