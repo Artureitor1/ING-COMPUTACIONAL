@@ -1,4 +1,4 @@
-function[d strainGLO stressGLO  React posgp]  = SolveElastFE(COOR,CN,TypeElement,TypeElementB, celasglo,  DOFr,dR,...  
+function[d strainGLO stressGLO  React posgp]  = SolveElastFE(COOR,CN,TypeElement,TypeElementB, celasglo, densglo,  DOFr,dR,...  
     Tnod,CNb,fNOD,Fpnt,typePROBLEM,celasgloINV,DATA,tempNode,alfa) ; 
 
 %%% This function returns the (nnode*ndim x 1) vector of nodal displacements (d),
@@ -45,6 +45,9 @@ d=[]; strainGLO=[] ; stressGLO=[] ;posgp=[] ;
 % ------------------------------
 disp('Computing stiffness matrix K ...')
 K = ComputeK(COOR,CN,TypeElement, celasglo) ; 
+
+disp('Computing mass matrix M ...')
+Mm = ComputeM(COOR,CN,TypeElement, densglo) ; 
 
 % B) External force vector due to body forces
 % ------------------------------
