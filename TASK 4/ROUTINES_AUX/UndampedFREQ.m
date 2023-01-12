@@ -7,8 +7,6 @@ if nargin == 0
     load('tmp.mat')
  
 end
-
-
 % We turn M and K symmetric, because otherwise 
 % the modes are not orthogonalized with respect to M
 % It should be noted that the lack of symmetry is caused by finine machine precision:   theoretically speaking,

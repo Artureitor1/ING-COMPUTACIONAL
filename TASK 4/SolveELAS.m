@@ -24,6 +24,7 @@ F = Fb + Ftrac+Fthermal ;
 DOFl = 1:nnode*ndim ;
 DOFl(DOFr) = [] ;
 
+
 d = zeros(nnode*ndim,1) ; % Nodal displacements (initialization)
 React = zeros(size(d)) ;  %  REaction forces  (initialization)
 

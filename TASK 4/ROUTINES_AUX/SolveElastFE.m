@@ -59,8 +59,10 @@ Fb = ComputeFb(COOR,CN,TypeElement, fNOD);
 disp('Computing  external force vector due to   boundary tractions ..')
 Ftrac = FtracCOMP(COOR,CNb,TypeElementB,Fpnt,Tnod);
 
-disp('Computing  thermal stress ..')
-Fthermal = computeFthermal(COOR,CN,TypeElement, celasglo,alfa,tempNode);
+disp('Computing  modal analysis...')
+[MODES FREQ]= computeFreq(COOR,CN,DOFr,M,K)
+
+
 
 
 % D) Solving for the vector of unknown displacements 
