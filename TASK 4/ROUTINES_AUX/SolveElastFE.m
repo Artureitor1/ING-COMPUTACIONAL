@@ -1,4 +1,4 @@
-function[d strainGLO stressGLO  React posgp]  = SolveElastFE(COOR,CN,TypeElement,TypeElementB, celasglo, densglo,  DOFr,dR,...  
+function[d strainGLO stressGLO  React posgp MODES DOFl]  = SolveElastFE(COOR,CN,TypeElement,TypeElementB, celasglo, densglo,  DOFr,dR,...  
     Tnod,CNb,fNOD,Fpnt,typePROBLEM,celasgloINV,DATA) ; 
 
 %%% This function returns the (nnode*ndim x 1) vector of nodal displacements (d),
@@ -48,6 +48,7 @@ ndim = size(COOR,2);
 DOFl = 1:nnode*ndim;
 DOFl(DOFr) = [] ;
 
+
 % A) Global stiffness matrix 
 % ------------------------------
 disp('Computing stiffness matrix K ...')
@@ -66,12 +67,18 @@ Fb = ComputeFb(COOR,CN,TypeElement, fNOD);
 disp('Computing  external force vector due to   boundary tractions ..')
 Ftrac = FtracCOMP(COOR,CNb,TypeElementB,Fpnt,Tnod);
 
+% D)  Modal frequencies analysis   
+% ------------------------------
 disp('Computing  modal analysis...')
 [MODES FREQ] = UndampedFREQ(Mm(DOFl,DOFl),K(DOFl,DOFl),20) 
 
+% % E)  First PostProcesing  
+% % ------------------------------
+% GidPostProcessModes(COOR,CN,TypeElement,MODES,posgp,'Beam_4',DATA,DOFl)
+
 % D) Solving for the vector of unknown displacements 
 disp('Solving...')
-[d strainGLO stressGLO  React posgp] = SolveELAS(K,Fb,Ftrac,dR,DOFr,COOR,CN,TypeElement,celasglo,typePROBLEM,celasgloINV,DATA,Fthermal) ; 
+[d strainGLO stressGLO  React posgp] = SolveELAS(K,Fb,Ftrac,dR,DOFr,COOR,CN,TypeElement,celasglo,typePROBLEM,celasgloINV,DATA) ; 
 
 
 

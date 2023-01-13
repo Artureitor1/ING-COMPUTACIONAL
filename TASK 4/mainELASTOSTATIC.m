@@ -25,11 +25,11 @@ NAME_INPUT_DATA = 'BEAM3D' ;  % Name of the mesh file
 
 % SOLVER 
 % --------------------------------------------
-[d strainGLO stressGLO  React posgp]= SolveElastFE(COOR,CN,TypeElement,TypeElementB, celasglo, ...
+[d strainGLO stressGLO  React posgp MODES DOFl]= SolveElastFE(COOR,CN,TypeElement,TypeElementB, celasglo, ...
     densglo, DOFr,dR, Tnod,CNb,fNOD,Fpnt,typePROBLEM,celasgloINV,DATA)  ; 
 
 reactionAdder(React,COOR);
 
 % POSTPROCESS
 % --------------------------------------------
-GidPostProcess(COOR,CN,TypeElement,d,strainGLO, stressGLO,  React,NAME_INPUT_DATA,posgp,NameFileMesh,DATA);
+GidPostProcessModes(COOR,CN,TypeElement,MODES,posgp,'Beam_4',DATA,DOFl)
