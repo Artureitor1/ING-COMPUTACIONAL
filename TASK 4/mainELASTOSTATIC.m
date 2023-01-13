@@ -8,7 +8,7 @@ clear all
 if exist('ElemBnd')==0
     addpath('ROUTINES_AUX') ,
 end
-
+dampingFactor = 0.01;
  
 %%% INPUT  %%% 
 % Input data file %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -25,7 +25,7 @@ NAME_INPUT_DATA = 'BEAM3D' ;  % Name of the mesh file
 
 % SOLVER 
 % --------------------------------------------
-[d strainGLO stressGLO  React posgp MODES DOFl]= SolveElastFE(COOR,CN,TypeElement,TypeElementB, celasglo, ...
+[d strainGLO stressGLO  React posgp MODES DOFl M Freq]= SolveElastFE(COOR,CN,TypeElement,TypeElementB, celasglo, ...
     densglo, DOFr,dR, Tnod,CNb,fNOD,Fpnt,typePROBLEM,celasgloINV,DATA)  ; 
 
 reactionAdder(React,COOR);
@@ -33,3 +33,8 @@ reactionAdder(React,COOR);
 % POSTPROCESS
 % --------------------------------------------
 GidPostProcessModes(COOR,CN,TypeElement,MODES,posgp,'Beam_4',DATA,DOFl)
+
+% DAMPING VIBRATION
+t = 0;
+[d] = dampedVibration(d,dampingFactor,MODES,Freq,M, DOFl,t)
+
