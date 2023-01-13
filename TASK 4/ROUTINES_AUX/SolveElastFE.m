@@ -78,9 +78,9 @@ disp('Computing  modal analysis...')
 
 % D) Solving for the vector of unknown displacements 
 disp('Solving...')
-[d strainGLO stressGLO  React posgp] = SolveELAS(K,Fb,Ftrac,dR,DOFr,COOR,CN,TypeElement,celasglo,typePROBLEM,celasgloINV,DATA) ; 
 
-
+[d strainGLO stressGLO  React posgp] = SolveELAS(K,Fb,Ftrac,dR,DOFr,COOR, ...
+    CN,TypeElement,celasglo,densglo, typePROBLEM,celasgloINV,DATA,Fthermal) ; 
 
 
 save('INFO_FE.mat','React','COOR','DOFr')
