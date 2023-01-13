@@ -80,7 +80,7 @@ disp('Computing  modal analysis...')
 disp('Solving...')
 
 [d strainGLO stressGLO  React posgp] = SolveELAS(K,Fb,Ftrac,dR,DOFr,COOR, ...
-    CN,TypeElement,celasglo,densglo, typePROBLEM,celasgloINV,DATA,Fthermal) ; 
+    CN,TypeElement,celasglo,densglo, typePROBLEM,celasgloINV,DATA) ; 
 
 
 save('INFO_FE.mat','React','COOR','DOFr')
