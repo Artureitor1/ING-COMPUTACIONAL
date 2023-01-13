@@ -1,5 +1,5 @@
 function [d strainGLO stressGLO  React posgp] = SolveELAS(K,Fb,Ftrac,dR,DOFr,COOR,CN,TypeElement,celasglo,...
-    typePROBLEM,celasgloINV,DATA) ;
+    densglo, typePROBLEM,celasgloINV,DATA) ;
 % This function returns   the (nnode*ndim x 1) vector of nodal displacements (d),
 % as well as the arrays of stresses and strains
 %%% points  (qheatGLO)
