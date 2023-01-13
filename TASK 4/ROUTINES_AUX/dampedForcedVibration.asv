@@ -1,0 +1,11 @@
+function [d] = dampedForcedVibration(d0,dampingFactor,MODES,Freq,M, DOFl,Force,Force_w, t)
+d = zeros(length(d0(DOFl)),1);
+d0 = d0 * 0;
+for mode = 1:length(Freq)
+    wBar = Freq(mode)*sqrt(1-dampingFactor^2);
+    fi = MODES(:,mode)'*Force;
+    rho_i = Force_w / Freq(mode);
+    q_max = fi / Freq(i)^2)MODES(:,mode)'*M(DOFl,DOFl)*d0(DOFl);
+    d = d+MODES(:,mode)*(exp(-dampingFactor*Freq(mode)*t)*(q*cos(wBar*t)+(q+dampingFactor*q*sin(wBar*t))/(wBar)));
+end 
+end

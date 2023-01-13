@@ -25,7 +25,7 @@ NAME_INPUT_DATA = 'BEAM3D' ;  % Name of the mesh file
 
 % SOLVER 
 % --------------------------------------------
-[d strainGLO stressGLO  React posgp MODES DOFl M Freq]= SolveElastFE(COOR,CN,TypeElement,TypeElementB, celasglo, ...
+[d, strainGLO, stressGLO, React, posgp, MODES, DOFl, M, Freq, Ftrac]= SolveElastFE(COOR,CN,TypeElement,TypeElementB, celasglo, ...
     densglo, DOFr,dR, Tnod,CNb,fNOD,Fpnt,typePROBLEM,celasgloINV,DATA)  ; 
 
 reactionAdder(React,COOR);
@@ -34,16 +34,33 @@ reactionAdder(React,COOR);
 % --------------------------------------------
 GidPostProcessModes(COOR,CN,TypeElement,MODES,posgp, NameFileMesh,DATA,DOFl)
 
-%% DAMPING VIBRATION
-t = linspace(0,40* 2*pi/Freq(5), 250);
-DISP = zeros(length(d), length(t));
+GidPostProcess(COOR,CN,TypeElement,d,strainGLO, stressGLO,  React,NAME_INPUT_DATA,posgp,NameFileMesh,DATA);
 
+
+% %% DAMPING VIBRATION
+% t = linspace(0,40* 2*pi/Freq(5), 250);
+% DISP = zeros(length(d), length(t));
+% 
+% for i = 1:length(t)
+%     DISP(DOFr,i) = d(DOFr);
+%     DISP(DOFl,i) = dampedVibration(d, dampingFactor, MODES, Freq, M, DOFl, t(i));
+% end
+% 
+% % PostPROCESS dynamimc
+% GidPostProcessDynamic(COOR, CN, TypeElement, DISP, NAME_INPUT_DATA, posgp,...
+%     NameFileMesh, t)
+
+%% Forced DAMPING
+t = linspace(0,40* 2*pi/Freq(5), 250);
+DISP_forced = zeros(length(d), length(t));
+force_w = 5; % rad/s
 for i = 1:length(t)
-    DISP(DOFr,i) = d(DOFr);
-    DISP(DOFl,i) = dampedVibration(d, dampingFactor, MODES, Freq, M, DOFl, t(i));
+    DISP_forced(DOFr,i) = d(DOFr);
+    DISP_forced(DOFl,i) = dampedForcedVibration(d,dampingFactor,MODES, Freq, ...
+        DOFl, Ftrac(DOFl), force_w, t(i));
 end
 
-% PostPROCESS dynamimc
-GidPostProcessDynamic(COOR, CN, TypeElement, DISP, NAME_INPUT_DATA, posgp,...
+GidPostProcessDynamic(COOR, CN, TypeElement, DISP_forced, NAME_INPUT_DATA, posgp,...
     NameFileMesh, t)
+
 

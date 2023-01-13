@@ -67,6 +67,7 @@ PROPMAT(imat).ElasticityMatrix =  ElasticityMatrix  ; %
 % POINT_FORCE(iforce).NODE = 1;
 % POINT_FORCE(iforce).VALUE = [0,0,0];    % Young's Modulus Units*(Length units)^2. In this case, MN
 
+%% 
 
 %% Conditions for torque
 % % -----------------------------------------------------------
@@ -116,7 +117,7 @@ POINT_FORCE(iforce).VALUE = [0,0.25,0];    % Young's Modulus Units*(Length units
 
 
 % -------------------------
-%---5.3)  Body forces
+%% ---5.3)  Body forces
 % ---------------------
 fBODY = 0 ;  % Constant value per unit volum MN/m^3.
 
