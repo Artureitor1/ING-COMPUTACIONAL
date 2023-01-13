@@ -32,9 +32,18 @@ reactionAdder(React,COOR);
 
 % POSTPROCESS
 % --------------------------------------------
-GidPostProcessModes(COOR,CN,TypeElement,MODES,posgp,'Beam_4',DATA,DOFl)
+GidPostProcessModes(COOR,CN,TypeElement,MODES,posgp, NameFileMesh,DATA,DOFl)
 
-% DAMPING VIBRATION
-t = 0;
-[d] = dampedVibration(d,dampingFactor,MODES,Freq,M, DOFl,t)
+%% DAMPING VIBRATION
+t = linspace(0,40* 2*pi/Freq(5), 250);
+DISP = zeros(length(d), length(t));
+
+for i = 1:length(t)
+    DISP(DOFr,i) = d(DOFr);
+    DISP(DOFl,i) = dampedVibration(d, dampingFactor, MODES, Freq, M, DOFl, t(i));
+end
+
+% PostPROCESS dynamimc
+GidPostProcessDynamic(COOR, CN, TypeElement, DISP, NAME_INPUT_DATA, posgp,...
+    NameFileMesh, t)
 

@@ -6,9 +6,9 @@ if nargin==0
 end
 
 % Name of the mesh file 
-NameFile_msh = ['GIDPOST/',NAME_INPUT_DATA,'_',NameFileMesh(1:end-4),'.msh'] ; 
+NameFile_msh = ['GIDPOST/',NAME_INPUT_DATA,'_',NameFileMesh(1:end-4),'_dyn.msh'] ; 
 % Name of the results file 
-NameFile_res= ['GIDPOST/',NAME_INPUT_DATA,'_',NameFileMesh(1:end-4),'.res'] ; 
+NameFile_res= ['GIDPOST/',NAME_INPUT_DATA,'_',NameFileMesh(1:end-4),'_dyn.res'] ; 
 
 % Writing mesh file
 MaterialType = ones(size(CN,1),1) ; 
