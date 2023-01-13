@@ -1,5 +1,5 @@
 function[d strainGLO stressGLO  React posgp]  = SolveElastFE(COOR,CN,TypeElement,TypeElementB, celasglo, densglo,  DOFr,dR,...  
-    Tnod,CNb,fNOD,Fpnt,typePROBLEM,celasgloINV,DATA,tempNode,alfa) ; 
+    Tnod,CNb,fNOD,Fpnt,typePROBLEM,celasgloINV,DATA) ; 
 
 %%% This function returns the (nnode*ndim x 1) vector of nodal displacements (d),
 %%% as well as the arrays containing  the stresses (stressGLO) and strains (strainGLO) at all gauss
@@ -40,7 +40,14 @@ function[d strainGLO stressGLO  React posgp]  = SolveElastFE(COOR,CN,TypeElement
 % 5. Body force
 % ---------------
 %  fNOD: Vector containing the nodal values of the heat source function (nnode*ndime x1 )%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-d=[]; strainGLO=[] ; stressGLO=[] ;posgp=[] ;  
+d=[]; strainGLO=[] ; stressGLO=[] ;posgp=[] ; 
+
+neig = 20;
+nnode = size(COOR,1); 
+ndim = size(COOR,2); 
+DOFl = 1:nnode*ndim;
+DOFl(DOFr) = [] ;
+
 % A) Global stiffness matrix 
 % ------------------------------
 disp('Computing stiffness matrix K ...')
@@ -60,10 +67,7 @@ disp('Computing  external force vector due to   boundary tractions ..')
 Ftrac = FtracCOMP(COOR,CNb,TypeElementB,Fpnt,Tnod);
 
 disp('Computing  modal analysis...')
-[MODES FREQ]= computeFreq(COOR,CN,DOFr,M,K)
-
-
-
+[MODES FREQ] = UndampedFREQ(Mm(DOFl,DOFl),K(DOFl,DOFl),20) 
 
 % D) Solving for the vector of unknown displacements 
 disp('Solving...')

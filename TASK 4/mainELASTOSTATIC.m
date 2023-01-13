@@ -26,7 +26,7 @@ NAME_INPUT_DATA = 'BEAM3D' ;  % Name of the mesh file
 % SOLVER 
 % --------------------------------------------
 [d strainGLO stressGLO  React posgp]= SolveElastFE(COOR,CN,TypeElement,TypeElementB, celasglo, ...
-    densglo, DOFr,dR, Tnod,CNb,fNOD,Fpnt,typePROBLEM,celasgloINV,DATA,tempNode,alfa)  ; 
+    densglo, DOFr,dR, Tnod,CNb,fNOD,Fpnt,typePROBLEM,celasgloINV,DATA)  ; 
 
 reactionAdder(React,COOR);
 
