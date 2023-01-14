@@ -1,4 +1,4 @@
-clci
+clc
 clear all
 % "Template" Finite Element Program for Heat Conduction Problems
 % ECA.
@@ -11,7 +11,7 @@ end
 %%% INPUT  %%% 
 % Input data file %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-NAME_INPUT_DATA = 'DATA_ASSIGNMENT2' ;
+NAME_INPUT_DATA = 'DATA_ASSIGNMENT2';
 %------------------------------------------------------
 
 % PREPROCESS  

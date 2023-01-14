@@ -29,6 +29,12 @@ switch TypeElement
         else
             error('Option not implemented')
         end
+    case 'Hexahedra'
+        if nnodeE ==8
+            [weig,posgp,shapef,dershapef] = Hexahedra8NInPoints ;
+        else
+            warning('Option not implemented')
+        end
     otherwise
         error('Option not implemented')
 end

@@ -55,7 +55,7 @@ nnode = size(COOR,1) ;% Number of nodes
 
 % 2. MATERIAL PROPERTIES: output ConductMglo  
 %-----------------------
-ndim = size(COOR,2); % Number of spatial dimensions (ndim=2 for 2D problems)
+ndim = size(COOR,3); % Number of spatial dimensions (ndim=2 for 2D problems)
 nelem = size(CN,1) ; % Number of elements
 ConductMglo = zeros(ndim,ndim,nelem) ; 
 % Conductivity matrix (isotropic)
