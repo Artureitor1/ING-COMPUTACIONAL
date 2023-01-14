@@ -15,13 +15,11 @@ NAME_INPUT_DATA = 'DATA_ASSIGNMENT2';
 %------------------------------------------------------
 
 % PREPROCESS  
-[COOR,CN,TypeElement,TypeElementB, ConductMglo,  rnod,dR,...  
-    qFLUXglo,CNb,fNOD,NameFileMesh] = ReadInputDataFile(NAME_INPUT_DATA)  ; 
+[COOR,CN,TypeElement,TypeElementB, ConductMglo,  rnod,dR, qFLUXglo,CNb,fNOD,NameFileMesh] = ReadInputDataFile(NAME_INPUT_DATA)  ; 
 
 % SOLVER 
 % --------------------------------------------
-[d,qheatGLO,posgp] = SolveHeatFE(COOR,CN,TypeElement,TypeElementB, ConductMglo,  rnod,dR,...  
-    qFLUXglo,CNb,fNOD)  ; 
+[d,qheatGLO,posgp] = SolveHeatFE(COOR,CN,TypeElement,TypeElementB, ConductMglo,  rnod,dR, qFLUXglo,CNb,fNOD)  ; 
 
 % POSTPROCESS
 % --------------------------------------------

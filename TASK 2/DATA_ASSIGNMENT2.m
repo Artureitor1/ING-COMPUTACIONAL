@@ -34,9 +34,7 @@ fSOURCE = 4 ;
 % END INPUTS 
 % ----------------------------------------------------------------------------------------------
 
-[COOR,CN,TypeElement,TypeElementB, ConductMglo,  rnod,dR,...  
-    qFLUXglo,CNb,fNOD,NameFileMesh] = ...
-    PreProcessInputData(NameFileMeshDATA,PROPMAT,DIRICHLET,NEUMANN,...
-    fSOURCE);
-
+%[COOR,CN,TypeElement,CONNECTb,TypeElementB, ConductMglo, dR,qFLUXglo,CNb,fNOD,NameFileMesh] = PreProcessInputData(NameFileMeshDATA,PROPMAT,DIRICHLET,NEUMANN,fSOURCE)
+[COOR,CN,TypeElement,CONNECTb,TypeElementB, ConductMglo, dR,rnod,qFLUXglo,CNb,fNOD,NameFileMesh] = PreProcessInputData(NameFileMeshDATA,PROPMAT,DIRICHLET,NEUMANN, fSOURCE)
+disp('lol')
 
