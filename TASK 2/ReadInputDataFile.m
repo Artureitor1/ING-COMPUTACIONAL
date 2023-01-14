@@ -1,5 +1,5 @@
 function [COOR,CN,TypeElement,TypeElementB, ConductMglo,  rnod,dR,...  
-    qFLUXglo,CNb,fNOD,NameFileMesh]  = ReadInputDataFile(NAME_INPUT_DATA) ; 
+    qFLUXglo,CNb,fNOD,NameFileMesh]  = ReadInputDataFile(NAME_INPUT_DATA)
 
 
 % OUTPUTS 
@@ -29,6 +29,7 @@ function [COOR,CN,TypeElement,TypeElementB, ConductMglo,  rnod,dR,...
 % 5. Heat source
 % ---------------
 %  fNOD: Vector containing the nodal values of the heat source function (nnode x1 )
- disp('Reading input data...')
+disp('Reading input data...')
 
-eval(NAME_INPUT_DATA) ; 
+eval(NAME_INPUT_DATA);
+end 

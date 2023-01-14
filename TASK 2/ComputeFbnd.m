@@ -17,7 +17,8 @@ if nargin ==0
 load('tmp2.mat')
 end
 
-
+CNb = cell2mat( CNb);
+qFLUXglo = cell2mat(qFLUXglo );
 % Dimensions of the problem 
 nnode = size(COOR,1);  
 nelemB = size(CNb,1);
