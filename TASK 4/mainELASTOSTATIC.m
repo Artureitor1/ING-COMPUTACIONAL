@@ -50,8 +50,8 @@ end
 % This code could be more optimized so it would only compute the
 % displacement of one of the nodes instead of every node
 dampingFactors = [ 0.05 0.1 0.3 0.5 0.99];
-axis = 3; % x = 1, y = 2, z = 3
-prevalent_mode = 5;
+axis = 2; % x = 1, y = 2, z = 3
+prevalent_mode = 1;
 node = 38;
 t = linspace(0,5* 2*pi/Freq(prevalent_mode), 150);
 figure();
@@ -64,7 +64,7 @@ for j = 1:length(dampingFactors)
         DISP(DOFr,i) = d(DOFr);
         DISP(DOFl,i) = dampedVibration(d, dampingFactors(j), MODES, Freq, M, DOFl, t(i));
     end
-    movement = DISP((38-1)*3+axis, :)';
+    movement = DISP((node-1)*3+axis, :)';
     plot(t, movement, 'LineWidth',2, ...
         'DisplayName',sprintf('$\\bar{\\xi}_i$ = %0.2f',dampingFactors(j)));
 end
@@ -82,8 +82,6 @@ for i=1:length(Freq)
     qi0(i) = MODES(:,i)'*M(DOFl,DOFl)*d(DOFl);
 end
 
-
-
 figure();
 bar(1:length(Freq), abs(qi0));
 
@@ -92,34 +90,61 @@ GidPostProcessDynamic(COOR, CN, TypeElement, DISP, NAME_INPUT_DATA, posgp,...
     NameFileMesh, t)
 
 %% Forced DAMPING
-% dampingFactor = 0.99;
-% t = linspace(0,40* 2*pi/Freq(5), 250);
-% F_freq = linspace(1, 1000, 100);
-% DISP_STEADY_MAX = zeros(length(F_freq), 1);
-% DISP_MAX = zeros(length(F_freq), 1);
-% for j = 1:length(F_freq)
-%     DISP_forced = zeros(length(d), length(t));
-%     DISP_steady = 0;
-%     for i = 1:length(t)
-%         DISP_forced(DOFr,i) = d(DOFr);
-%         DISP_forced(DOFl,i) = dampedForcedVibration(d,dampingFactor,MODES, Freq, ...
-%             DOFl, Ftrac(DOFl), F_freq(j), t(i));
-% 
-%         DISP_steady = max(DISP_steady, dampedForcedVibrationMaxDSteady(d,dampingFactor,MODES, Freq, ...
-%             DOFl, Ftrac(DOFl), F_freq(j), t(i)));
-%     end
-%     DISP_MAX(j) = max(abs(DISP_forced),[],'all');
-%     DISP_STEADY_MAX(j) = DISP_steady;
-%     fprintf('iteration %d, frequency:%f\n', j, F_freq(j));
-%     
-% end
-% 
-% figure();
-% hold on;
-% plot(F_freq, 20*log10(DISP_STEADY_MAX./1e-12));
-% plot(F_freq, 20*log10(DISP_MAX./1e-12))
-% hold off;
-% 
-% %GidPostProcessDynamicDamped(DISP_forced,t,nodeID)
+dampingFactor = 0.03;
+t = linspace(0,30* 2*pi/Freq(5), 500);
+F_freqs = [Freq(5)*0.8, Freq(5)*.9];
+figure();
+get(gca,'fontname')  % shows you what you are using.
+set(gca,'fontname','times')  % Set it to times
+hold on;
+for j = 1:length(F_freqs)
+    DISP_forced = zeros(length(d), length(t));
+    for i = 1:length(t)
+        DISP_forced(DOFr,i) = d(DOFr);
+        DISP_forced(DOFl,i) = dampedForcedVibration(d,dampingFactor,MODES, Freq, ...
+            DOFl, Ftrac(DOFl), F_freqs(j), t(i));
+    end
+    plot(t, DISP_forced((node-1)*3 + axis,:), ...
+        'DisplayName',sprintf('$\\bar{\\omega}_i$ = %0.2f rad/s',F_freqs(j)));
+end
+
+title('Forced vibration: $\bar{\xi}_i = 0.03$ - Torque Load', 'Interpreter', 'latex');
+xlabel('Time [s]') 
+ylabel('Displacement in Z [m]')
+leg = legend();
+set(leg,'interpreter','latex');
+legend;
+hold off;
+
+GidPostProcessDynamic(COOR, CN, TypeElement, DISP_forced, NAME_INPUT_DATA, posgp,...
+    'Beam_4_disp.msh', t)
+
+%% Frequency analysis
+
+
+dampingFactors = [0.01, 0.1, 0.5, 0.99];
+F_freq = linspace(1, 20000, 500);
+DISP_STEADY_MAX = zeros(length(F_freq), 1);
+figure();
+get(gca,'fontname')  % shows you what you are using.
+set(gca,'fontname','times')  % Set it to times
+hold on;
+for i = 1:length(dampingFactors)
+    for j = 1:length(F_freq)
+        d1 = zeros(length(d),1);
+        d1(DOFl) = dampedForcedVibrationMaxDSteady(d,dampingFactors(i),MODES, Freq, ...
+                DOFl, Ftrac(DOFl), F_freq(j), t(i));
+        DISP_STEADY_MAX(j) = abs(d1((node-1)*3 + axis));
+    end
+    plot(F_freq, 20*log10(DISP_STEADY_MAX./1e-12), ...
+        'DisplayName',sprintf('$\\bar{\\xi}_i$ = %0.2f',dampingFactors(i)));
+end
+title('Frequency response of the beam - Torque Load');
+xlabel('Frequency [rad/s]') 
+ylabel('Displacement [dB]')
+leg = legend();
+set(leg,'interpreter','latex');
+legend;
+hold off;
 
 
