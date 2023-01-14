@@ -42,7 +42,7 @@ function[d strainGLO stressGLO  React posgp MODES DOFl Mm FREQ, Ftrac]  = SolveE
 %  fNOD: Vector containing the nodal values of the heat source function (nnode*ndime x1 )%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 d=[]; strainGLO=[] ; stressGLO=[] ;posgp=[] ; 
 
-neig = 20;
+neig = 15;
 nnode = size(COOR,1); 
 ndim = size(COOR,2); 
 DOFl = 1:nnode*ndim;
