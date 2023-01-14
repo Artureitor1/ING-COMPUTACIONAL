@@ -14,11 +14,11 @@ numer_nodes = 1:size(COOR,1) ;
 %E_JAHO
 
 elem_type = TypeElement;
- NNode=size(CONNECT,2);
- ndime = size(COOR,2) ;
- nnod = size(COOR,1) ;
- npe =  size(CONNECT,2) ;
- nElem = size(CONNECT,1) ;
+NNode=size(CONNECT,2);
+ndime = size(COOR,2) ;
+nnod = size(COOR,1) ;
+npe =  size(CONNECT,2) ;
+nElem = size(CONNECT,1) ;
 fid = fopen(NameFile,'wt');
 
 % 1.- Header with 6 free lines

@@ -1,4 +1,4 @@
-function[d strainGLO stressGLO  React posgp MODES DOFl Mm FREQ]  = SolveElastFE(COOR,CN,TypeElement,TypeElementB, celasglo, densglo,  DOFr,dR,...  
+function[d strainGLO stressGLO  React posgp MODES DOFl Mm FREQ, Ftrac]  = SolveElastFE(COOR,CN,TypeElement,TypeElementB, celasglo, densglo,  DOFr,dR,...  
     Tnod,CNb,fNOD,Fpnt,typePROBLEM,celasgloINV,DATA) ; 
 
 %%% This function returns the (nnode*ndim x 1) vector of nodal displacements (d),
@@ -42,7 +42,7 @@ function[d strainGLO stressGLO  React posgp MODES DOFl Mm FREQ]  = SolveElastFE(
 %  fNOD: Vector containing the nodal values of the heat source function (nnode*ndime x1 )%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 d=[]; strainGLO=[] ; stressGLO=[] ;posgp=[] ; 
 
-neig = 20;
+neig = 15;
 nnode = size(COOR,1); 
 ndim = size(COOR,2); 
 DOFl = 1:nnode*ndim;
