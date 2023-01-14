@@ -45,12 +45,44 @@ for i = 1:length(t)
     DISP(DOFr,i) = d(DOFr);
     DISP(DOFl,i) = dampedVibration(d, dampingFactor, MODES, Freq, M, DOFl, t(i));
 end
+
+%% Response of one node with different damping ratios
+% This code could be more optimized so it would only compute the
+% displacement of one of the nodes instead of every node
+dampingFactors = [ 0.05 0.1 0.3 0.5 0.99];
+axis = 3; % x = 1, y = 2, z = 3
+prevalent_mode = 5;
+node = 38;
+t = linspace(0,5* 2*pi/Freq(prevalent_mode), 150);
+figure();
+get(gca,'fontname')  % shows you what you are using.
+set(gca,'fontname','times')  % Set it to times
+hold on;
+for j = 1:length(dampingFactors)
+    DISP = zeros(length(d), length(t));
+    for i = 1:length(t)
+        DISP(DOFr,i) = d(DOFr);
+        DISP(DOFl,i) = dampedVibration(d, dampingFactors(j), MODES, Freq, M, DOFl, t(i));
+    end
+    movement = DISP((38-1)*3+axis, :)';
+    plot(t, movement, 'LineWidth',2, ...
+        'DisplayName',sprintf('$\\bar{\\xi}_i$ = %0.2f',dampingFactors(j)));
+end
+title('Displacement in free damped vibration - Bending Load');
+xlabel('Time [s]') 
+ylabel('Displacement [m]')
+leg = legend();
+set(leg,'interpreter','latex');
+legend;
+hold off
 %% 
 %% Amplitude of modes graphic
 qi0 = zeros(length(Freq), 1);
 for i=1:length(Freq)
     qi0(i) = MODES(:,i)'*M(DOFl,DOFl)*d(DOFl);
 end
+
+
 
 figure();
 bar(1:length(Freq), abs(qi0));
