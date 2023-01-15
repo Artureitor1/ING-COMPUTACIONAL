@@ -15,6 +15,12 @@ if nargin == 0
 end
 
 switch TypeElement
+    case 'Triangle'
+        if nnodeE ==3
+            [weig,posgp,shapef,dershapef] = Triangle3NInPoints(TypeIntegrand) ;
+        else
+            error('Option not implemented')
+        end
     case 'Linear'
         if nnodeE ==2
             [weig,posgp,shapef,dershapef] = Linear2NInPoints(TypeIntegrand) ;

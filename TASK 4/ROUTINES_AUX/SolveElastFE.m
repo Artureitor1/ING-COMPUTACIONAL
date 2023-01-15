@@ -56,17 +56,6 @@ K = ComputeK(COOR,CN,TypeElement, celasglo) ;
 
 disp('Computing mass matrix M ...')
 Mm = ComputeM(COOR,CN,TypeElement, densglo) ; 
-
-% B) External force vector due to body forces
-% ------------------------------
-disp('Computing   external force vector due to body forces (Fb)...')
-Fb = ComputeFb(COOR,CN,TypeElement, fNOD);
-
-% C)  External force vector due to   boundary tractions  
-% ------------------------------
-disp('Computing  external force vector due to   boundary tractions ..')
-Ftrac = FtracCOMP(COOR,CNb,TypeElementB,Fpnt,Tnod);
-
 % D)  Modal frequencies analysis   
 % ------------------------------
 disp('Computing  modal analysis...')
@@ -74,13 +63,4 @@ disp('Computing  modal analysis...')
 
 % % E)  First PostProcesing  
 % % ------------------------------
-% GidPostProcessModes(COOR,CN,TypeElement,MODES,posgp,'Beam_4',DATA,DOFl)
-
-% D) Solving for the vector of unknown displacements 
-disp('Solving...')
-
-[d strainGLO stressGLO  React posgp] = SolveELAS(K,Fb,Ftrac,dR,DOFr,COOR, ...
-    CN,TypeElement,celasglo,densglo, typePROBLEM,celasgloINV,DATA) ; 
-
-
-save('INFO_FE.mat','React','COOR','DOFr')
+GidPostProcessModes(COOR,CN,TypeElement,MODES,posgp,'Beam_4',DATA,DOFl)

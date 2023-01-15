@@ -1,6 +1,6 @@
 function [COOR,CN,TypeElement,CONNECTb,TypeElementB,MaterialType,celasglo,...
     DOFr,dR,Tnod,CNb,fNOD,Fpnt,NameFileMesh,densglo,celasgloINV] = ...
-    PreProcessInputData(NameFileMeshDATA,PROPMAT,DIRICHLET,NEUMANN,POINT_FORCE,...
+    PreProcessInputData(NameFileMeshDATA,PROPMAT,...
     fBODY,dens0,typePROBLEM)
 
 
@@ -61,30 +61,10 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % List of nodes at which displacement is prescribed (in any of the x-y and z directions)
 rnod = cell(ndim,1) ; uPRES=cell(ndim,1)  ; 
-for  icond = 1:length(DIRICHLET)
-    rnodLOC=  ListOfNodesFACES(NameFileMesh,DIRICHLET(icond).NUMBER_SURFACE,ndim) ;
-    PRESCRIBED_DISPLACEMENT = DIRICHLET(icond).PRESCRIBED_DISP; 
-    for idim = 1:ndim
-        if ~isempty(PRESCRIBED_DISPLACEMENT{idim})
-            displ1 = PRESCRIBED_DISPLACEMENT{idim} ; 
-            rnod{idim} = [rnod{idim}; rnodLOC] ; 
-            uPRES{idim} =  [uPRES{idim}; displ1*ones(size(rnod{idim}))] ;  
-        end
-    end       
-end
-% Removed repeated condions 
-% ---------------------------
-for idim = 1:ndim 
-   [rnod{idim}, AAA] = unique(rnod{idim}) ;
-   uPRES{idim} = uPRES{idim}(AAA) ; 
-end
+
  
 % Degrees of freedom and prescribed displacements 
 DOFr = [] ; dR = [] ; 
-for idim = 1:ndim 
-    DOFr = [DOFr ; (rnod{idim}-1)*ndim+idim]; 
-    dR = [dR ; uPRES{idim}]; 
-end
  
 %%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -93,30 +73,12 @@ end
 % DISTRIBUTED LOADS
 % ------------------------
 CNb =cell(ndim,1) ; Tnod=cell(ndim,1) ;
-for  icond = 1:length(NEUMANN)
-    rnodLOC=  ListOfNodesFACES(NameFileMesh,NEUMANN(icond).NUMBER_SURFACE,ndim) ;
-    FORCE_PER_UNIT_SURFACE = NEUMANN(icond).FORCE_PER_UNIT_SURFACE;
-    for idim = 1:ndim
-        if FORCE_PER_UNIT_SURFACE(idim) ~= 0
-            t = FORCE_PER_UNIT_SURFACE(idim) ;
-            CNbLOC = ElemBnd(CONNECTb,rnodLOC) ;
-            TnodLOC = t*ones(size(CNbLOC)) ;
-            CNb{idim} = [CNb{idim} ; CNbLOC] ;
-            Tnod{idim} = [Tnod{idim}  ; TnodLOC] ;
-        end
-    end
-end
       
 
 % POINT LOADS 
 % -----------
 Fpnt =zeros(ndim*nnode,1) ; % There are no point loads
-for iforce = 1:length(POINT_FORCE) 
-    FORCE = POINT_FORCE(iforce).VALUE(1:ndim) ; 
-    NODELOC = POINT_FORCE(iforce).NODE ; 
-    DOFSloc =    Nod2DOF(NODELOC,ndim) ; 
-    Fpnt(DOFSloc) = Fpnt(DOFSloc) + FORCE(:) ;  
-end
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 5. Body forces
 %% 
