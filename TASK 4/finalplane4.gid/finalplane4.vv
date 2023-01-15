@@ -1,10 +1,10 @@
-BeginZE /media/vick/INFO/documents/Academy/Master/M4/final_master_thesis/finalplane4.gid/finalplane4.vv
-   x -16754.1796875 -2519.0029296875
+BeginZE
+   x -19518.068359375 244.885986328125
    y 4017.39599609375 -4800.33447265625
    z -22148.0234375 20311.890625
    e 10847.7666015625
-   v -0.5163028530467767 -0.276920355386586381 -0.353102938155659019
-   r -0.729427684693843004
+   v -0.516302824020385742 -0.276920348405838013 -0.353102952241897583
+   r -0.729427695274353027
    m 0.597266852855682373 -0.229176580905914307 0.768602848052978516 0 0.801075637340545654 0.21749936044216156 -0.557648420333862305 0 -0.0393706373870372772 0.948773980140686035 0.313492953777313232 0 0 0 0 1
    c -10341.20703125 -80.3924026489257812 918.06640625
    pd 0
@@ -29,7 +29,7 @@ BeginZE /media/vick/INFO/documents/Academy/Master/M4/final_master_thesis/finalpl
    OGLStereo(EyeDistance) 0.075
    OGLStereo(LeftEyeDistance) 1 0 0 1
    OGLStereo(RightEyeDistance) 0 1 1 1
-EndZE /media/vick/INFO/documents/Academy/Master/M4/final_master_thesis/finalplane4.gid/finalplane4.vv
+EndZE
 
 BeginMirror
    Mirror 0 Angle 0.0 AngleFake -15.0 SizeFactor 2.0 HeightOffset 0.25 Color #d9e5f24d Backlight Off EdgeStyle No Type Scene DrawMode Mirror
