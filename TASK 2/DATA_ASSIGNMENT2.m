@@ -23,7 +23,7 @@ DIRICHLET(icond).PRESCRIBED_TEMPER = 100 ;
 % ------------------------------------------------
 icond= 1 ;
 NEUMANN(icond).NUMBER_SURFACE = 2 ;  % Surface on which the load is applied
-NEUMANN(icond).PRESCRIBED_qBAR= [0.2 0 0] ;
+NEUMANN(icond).PRESCRIBED_qBAR= [0.05 0 0] ;
 
 % -------------------------------------------
 % 4. Heat source (constant all over the body)
