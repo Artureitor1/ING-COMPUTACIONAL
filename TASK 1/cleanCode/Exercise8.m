@@ -63,7 +63,7 @@ function error = computeError(nodeDisplacement,exactDisplacement,exactDerivative
                 N = 1/2 * [1-xi(g) 1+xi(g)];
                 B = 1/elementLength *[-1 1];
                 integratingErrorDisplacement = (exactDisplacement(N * elementCoords')-(1/2 * [1-xi(g) 1+xi(g)])*elementDisplacement)^2;
-                integratingErrorDerivative = (exactDerivative(N * elementCoords')-(B*elementDisplacement))^2;
+                integratingErrorDerivative = (exactDerivative(N * elementCoords')-(B*elementDisplacement))^2+(exactDisplacement(N * elementCoords')-(1/2 * [1-xi(g) 1+xi(g)])*elementDisplacement)^2;
                 errorPerElement(1,1) = errorPerElement(1,1) + ws(g) * (integratingErrorDisplacement);
                 errorPerElement(1,2) = errorPerElement(1,2) + ws(g) * (integratingErrorDerivative);
             end
