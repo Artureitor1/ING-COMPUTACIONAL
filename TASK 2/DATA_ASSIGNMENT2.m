@@ -16,19 +16,19 @@ PROPMAT(imat).kappa =  10  ; %  Conductivity  of material "imat" (ISOTROPIC)
 % -----------------------------------------------------------
 icond = 1; % Number of condition
 DIRICHLET(icond).NUMBER_SURFACE = 1 ;   % Number of SURFACE on which DISPLACEMENT  is prescribed
-DIRICHLET(icond).PRESCRIBED_TEMPER = 0 ;
+DIRICHLET(icond).PRESCRIBED_TEMPER = 100 ;
 
 % -------------------------------------------------
 % 4. Neumann Boundary conditions (prescribed flux)
 % ------------------------------------------------
 icond= 1 ;
 NEUMANN(icond).NUMBER_SURFACE = 2 ;  % Surface on which the load is applied
-NEUMANN(icond).PRESCRIBED_qBAR= [-20 0 0] ;
+NEUMANN(icond).PRESCRIBED_qBAR= [0.2 0 0] ;
 
 % -------------------------------------------
 % 4. Heat source (constant all over the body)
 % --------------------------------------------
-fSOURCE = 4 ; 
+fSOURCE = 20; 
 
 
 % END INPUTS 

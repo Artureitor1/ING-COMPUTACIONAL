@@ -41,12 +41,10 @@ for e = 1:nelemB
     Xe = COOR(CNloc,:)' ;
     % Computation of elemental sourve flux vector   
     %dbstop('40')
-    FbndE = ComputeFbndVector(qFLUXe,weig,shapef,dershapef,Xe) ; 
+    FbndE = qFLUXe./4; 
     for a=1:nnodeEb 
             A = CNb(e,a) ;        
             Fbnd(A) = Fbnd(A) + FbndE(a) ; 
     end
 end
-    
-    
 
