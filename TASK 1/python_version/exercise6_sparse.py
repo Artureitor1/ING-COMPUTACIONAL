@@ -1,7 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from math import pi
+import scipy.sparse as sparse
 import time
+from random import random
+
 
 def COMPUTE_Fe_FORCE(f,node, elementCoor):
     eps = [-1/np.sqrt(3), 1/np.sqrt(3)];
@@ -56,14 +58,14 @@ def AssemblyF(coor, conectivityMatrix, f, nodes):
 def computeDisplacement(nodes, restringedNodes, restringedForce, coords, conectivityMatrix, f, F_AE, rho, time_stamps):
 
     time_stamps['assembly_start'] = float(time.perf_counter() - time_stamps['start'])
-    stiffnesMatrix = AssemblyK(coords, conectivityMatrix, rho);
+    stiffnesMatrix = sparse.csr_matrix(AssemblyK(coords, conectivityMatrix, rho))
     time_stamps['assembly_end'] = float(time.perf_counter() - time_stamps['start'])
 
     time_stamps['force_start'] = float(time.perf_counter() - time_stamps['start'])
-    Force = AssemblyF(coords, conectivityMatrix, f, nodes);
+    Force = sparse.csr_array(AssemblyF(coords, conectivityMatrix, f, nodes))
     time_stamps['force_end'] = float(time.perf_counter() - time_stamps['start'])
 
-    ft = np.zeros(len(Force));
+    ft = np.zeros((Force.shape[1]));
     ft[int(restringedForce[0])] = restringedForce[1]
     Force = Force + ft
     dr = np.zeros(len(nodes))
@@ -71,9 +73,10 @@ def computeDisplacement(nodes, restringedNodes, restringedForce, coords, conecti
     dr[int(restringedNodes[0])] = restringedNodes[1]
     sub_stiffnesMatrix = stiffnesMatrix[1:,1:]
     sub_stiffnesMatrix_2 = stiffnesMatrix[1:,int(restringedNodes[0])]
-    sub_Force = Force[1:]
+    sub_Force = Force[:,1:].T
     time_stamps['solve_start'] = float(time.perf_counter() - time_stamps['start'])
-    dl[1:] = np.dot(np.linalg.inv(sub_stiffnesMatrix),(sub_Force-sub_stiffnesMatrix_2*restringedNodes[1]))
+    # = 
+    dl[1:] = sparse.linalg.spsolve(sub_stiffnesMatrix,(sub_Force-sub_stiffnesMatrix_2*restringedNodes[1]))
     d = dl+dr;
     time_stamps['solve_end'] = float(time.perf_counter() - time_stamps['start'])
     return d, time_stamps
@@ -116,17 +119,18 @@ def computeDisplacementAll(L, g, elementsNumber, time_stamps):
 
 def give_times(n = 15, el = 40):
     times = []
-    for i in range(n):
-        d, coords, time_stamps = computeDisplacementAll(1.0, 0.01, el, {'start': time.perf_counter()})
+    for _ in range(n):
+        _, _, time_stamps = computeDisplacementAll(1.0, 0.01, el, {'start': time.perf_counter()})
         time_stamps['end'] = float(time.perf_counter() - time_stamps['start'])
-        time_stamps['start'] =0
+        time_stamps['start'] = 0
         times.append(time_stamps)
     return times
+    
 if __name__ == "__main__":
     n_elms = [1, 10, 100, 1000, 2000, 3000]
     results = []
-    for el in [1000]:#n_elms[0:2]:
-        times = give_times(n=100, el = el)
+    for el in n_elms[0:2]:
+        times = give_times(n=10, el = el)
         total = np.mean([t['end'] - t['start'] for t in times])
         results.append(total)
 
@@ -134,14 +138,13 @@ if __name__ == "__main__":
         print("Solve time: ", np.mean([t['solve_end'] - t['solve_start'] for t in times]))
         print("Assembly time: ", np.mean([t['assembly_end'] - t['assembly_start'] for t in times]))
         print("Force time: ", np.mean([t['force_end'] - t['force_start'] for t in times]))
-    """ 
+   
     plt.plot(n_elms, results)
     plt.show()
-    #plt.plot(coords, d, 'o-')
-    #plt.show()
+
     
     file = open("results_sparse.txt", "w")
     for i in range(len(n_elms)):
         file.write(str(n_elms[i]) + " " + str(results[i]) + "\n")
     file.close()
-    """
+
