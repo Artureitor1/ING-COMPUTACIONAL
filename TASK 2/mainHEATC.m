@@ -22,6 +22,7 @@ NAME_INPUT_DATA = 'DATA_ASSIGNMENT2';
 % --------------------------------------------
 [d,qheatGLO,posgp] = SolveHeatFE(COOR,CN,TypeElement,TypeElementB, ConductMglo,  rnod,dR,...  
     qFLUXglo,CNb,fNOD)  ; 
+[fluxElement] = thermalEquilibrium(qheatGLO,CN,COOR)
 
 % POSTPROCESS
 % --------------------------------------------
