@@ -28,3 +28,13 @@ NAME_INPUT_DATA = 'DATA_ASSIGNMENT2';
 % --------------------------------------------
 disp('POSTPROCESS....')
 GidPostProcess(COOR,CN,TypeElement,d,qheatGLO,NAME_INPUT_DATA,posgp,NameFileMesh);
+[elements, ~] = size(CN);
+figure
+hold on
+title('Thermal equilibrium error per element', 'Interpreter','latex', 'FontSize',16)
+bar(1:elements, fluxElement)
+grid on
+grid minor
+xlabel('Element', 'Interpreter','latex', 'FontSize',15)
+ylabel('HeatFlux (W/m2)', 'Interpreter','latex', 'FontSize',15)
+hold off
